@@ -1,6 +1,7 @@
 package com.app.samples.samplejsfapp.jsfbeans;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -16,6 +17,9 @@ public class Employee {
 	/** The logger. */
 	Logger logger = Logger.getLogger(Employee.class.getName());
 
+	/** The full name. */
+	private String fullName;
+
 	/** The first name. */
 	private String firstName;
 
@@ -27,6 +31,12 @@ public class Employee {
 
 	/** The country options. */
 	private List<String> countryOptions;
+
+	/** The favorite language. */
+	private String favoriteLanguage;
+
+	/** The favorite games. */
+	private String[] favoriteGames;
 	/**
 	 * Instantiates a new employee.
 	 */
@@ -49,6 +59,9 @@ public class Employee {
 	 * @return the first name
 	 */
 	public String getFirstName() {
+		if(firstName != null) {
+			logger.info("first name : "+firstName);
+		}
 		return firstName;
 	}
 
@@ -67,6 +80,9 @@ public class Employee {
 	 * @return the last name
 	 */
 	public String getLastName() {
+		if(lastName != null) {
+			logger.info("last name : "+lastName);
+		}
 		return lastName;
 	}
 
@@ -86,6 +102,9 @@ public class Employee {
 	 * @return the country
 	 */
 	public String getCountry() {
+		if(country != null) {
+			logger.info("country : "+country);
+		}
 		return country;
 	}
 
@@ -98,14 +117,79 @@ public class Employee {
 		this.country = country;
 	}
 
-
 	/**
 	 * Gets the country options.
 	 *
 	 * @return the country options
 	 */
 	public List<String> getCountryOptions() {
+		if(countryOptions != null) {
+			logger.info("list of countries : "+countryOptions);
+		}
 		return countryOptions;
+	}	
+
+
+	/**
+	 * Gets the favorite language.
+	 *
+	 * @return the favorite language
+	 */
+	public String getFavoriteLanguage() {
+		if(favoriteLanguage != null) {
+			logger.info("favorite language : "+favoriteLanguage);
+		}
+		return favoriteLanguage;
+	}
+
+	/**
+	 * Sets the favorite language.
+	 *
+	 * @param favoriteLanguage the new favorite language
+	 */
+	public void setFavoriteLanguage(String favoriteLanguage) {
+		this.favoriteLanguage = favoriteLanguage;
+	}
+
+	/**
+	 * Gets the full name.
+	 *
+	 * @return the full name
+	 */
+	public String getFullName() {
+		logger.info("full name : "+firstName+" "+lastName);
+		return firstName+" "+lastName;
+	}
+
+	/**
+	 * Sets the full name.
+	 *
+	 * @param fullName the new full name
+	 */
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+
+	/**
+	 * Gets the favorite games.
+	 *
+	 * @return the favorite games
+	 */
+	public String[] getFavoriteGames() {
+		if(favoriteGames != null) {
+			logger.info("favorite games : "+favoriteGames);
+		}
+		return favoriteGames;
+	}
+
+	/**
+	 * Sets the favorite games.
+	 *
+	 * @param favoriteGames the new favorite games
+	 */
+	public void setFavoriteGames(String[] favoriteGames) {
+		this.favoriteGames = favoriteGames;
 	}
 
 	/**
@@ -115,8 +199,9 @@ public class Employee {
 	 */
 	@Override
 	public String toString() {
-		return "Employee [firstName=" + firstName + ", lastName=" + lastName + ", country=" + country
-				+ ", countryOptions=" + countryOptions + "]";
-	}	
+		return "Employee [fullName=" + fullName + ", firstName=" + firstName + ", lastName=" + lastName + ", country="
+				+ country + ", countryOptions=" + countryOptions + ", favoriteLanguage=" + favoriteLanguage
+				+ ", favoriteGames=" + favoriteGames + "]";
+	}		
 
 }

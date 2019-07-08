@@ -4,15 +4,13 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-
 <h:head>
 	<title>Employee Registration Form</title>
 </h:head>
 
 <h:body>
 
-	<h:form>
-		
+	<h:form>		
 		First name: <h:inputText id="firstName" value="#{employee.firstName}"
 			a:placeholder="What's your first name?" />
 		<br />
@@ -23,25 +21,33 @@
 		<br />
 		<br />
 		
-		Country : <h:selectOneMenu id="country" value="#{employee.country}"
-			a:placeholder="Please select country">
+		Country : <h:selectOneMenu id="country" value="#{employee.country}">
 			<f:selectItems value="#{employee.countryOptions}" />
 		</h:selectOneMenu>
-		<br/>
-		<br/>
+		<br />
+		<br />
+		
+		Favorite Programming Language : <h:selectOneRadio
+			id="favoriteLanguage" value="#{employee.favoriteLanguage}">
+			<f:selectItem itemValue="Java" itemLabel="Java" />
+			<f:selectItem itemValue="PHP" itemLabel="PHP" />
+			<f:selectItem itemValue="Python" itemLabel="Python" />
+			<f:selectItem itemValue="C" itemLabel="C" />
+			<f:selectItem itemValue="CPP" itemLabel="CPP" />
+		</h:selectOneRadio>
+		<br />
+<!-- 		<br />		-->		
+		Favorite Games : <h:selectManyCheckbox id="favoriteGames"
+			value="#{employee.favoriteGames}">
+			<f:selectItem itemValue="Volleyball" itemLabel="Volleyball" />
+			<f:selectItem itemValue="Cricket" itemLabel="Cricket" />
+			<f:selectItem itemValue="Sudoku" itemLabel="Sudoku" />
+			<f:selectItem itemValue="Badminton" itemLabel="Badminton" />
+			<f:selectItem itemValue="Chess" itemLabel="Chess" />
+		</h:selectManyCheckbox>
 
-		<!-- Country :  <h:selectOneMenu id="country" value="#{employee.country}"
-			a:placeholder="Please select country">
-			<f:selectItem itemValue="Brazil" itemLabel="Brazil" />
-			<f:selectItem itemValue="France" itemLabel="France" />
-			<f:selectItem itemValue="Germany" itemLabel="Germany" />
-			<f:selectItem itemValue="India" itemLabel="India" />
-			<f:selectItem itemValue="Turkey" itemLabel="Turkey" />
-			<f:selectItem itemValue="United Kingdom" itemLabel="United Kingdom" />
-			<f:selectItem itemValue="United States" itemLabel="United States" />
-		</h:selectOneMenu> -->
+		<br />
 		<h:commandButton value="Submit" action="employee_response" />
-
 	</h:form>
 
 </h:body>

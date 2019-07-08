@@ -1,17 +1,28 @@
 <!DOCTYPE html>
-<html lang="en"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-    <h:head>
-        <title>Employee Confirmation</title>
-    </h:head>
+<h:head>
+	<title>Employee Confirmation</title>
+</h:head>
 
-    <h:body>
-	    Employee is confirmed: #{employee.firstName} #{employee.lastName}
-	    <br/>
-	    <br/>
+<h:body>
+	    Employee is confirmed: #{employee.fullName}
+	    <br />
+	<br />
 	 	Employee's Country : #{employee.country}
-    </h:body>
+	 	<br />
+	<br />
+	 	Favorite Language : #{employee.favoriteLanguage}
+	 	<br />
+	<br />
+	 	Favorite Games : 
+	 	<ul>
+		<ui:repeat value="#{employee.favoriteGames}" var="tempGame">
+			<li>#{tempGame}</li>
+		</ui:repeat>
+	</ul>
+</h:body>
 </html>
