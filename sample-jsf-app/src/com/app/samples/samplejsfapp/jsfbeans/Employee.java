@@ -25,6 +25,10 @@ public class Employee {
 
 	/** The last name. */
 	private String lastName;
+	
+	
+	/** The email. */
+	private String email;
 
 	/** The country. */
 	private String country;
@@ -178,7 +182,10 @@ public class Employee {
 	 */
 	public String[] getFavoriteGames() {
 		if(favoriteGames != null) {
-			logger.info("favorite games : "+favoriteGames);
+			logger.info("Favorite Games : ");
+			for(String str : favoriteGames) {
+				logger.info(str+",");
+			}
 		}
 		return favoriteGames;
 	}
@@ -191,6 +198,26 @@ public class Employee {
 	public void setFavoriteGames(String[] favoriteGames) {
 		this.favoriteGames = favoriteGames;
 	}
+	
+	
+
+	/**
+	 * Gets the email.
+	 *
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/**
+	 * Sets the email.
+	 *
+	 * @param email the new email
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	/**
 	 * To string.
@@ -199,9 +226,9 @@ public class Employee {
 	 */
 	@Override
 	public String toString() {
-		return "Employee [fullName=" + fullName + ", firstName=" + firstName + ", lastName=" + lastName + ", country="
-				+ country + ", countryOptions=" + countryOptions + ", favoriteLanguage=" + favoriteLanguage
-				+ ", favoriteGames=" + favoriteGames + "]";
+		return "Employee [logger=" + logger + ", fullName=" + fullName + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", email=" + email + ", country=" + country + ", countryOptions=" + countryOptions
+				+ ", favoriteLanguage=" + favoriteLanguage + ", favoriteGames=" + Arrays.toString(favoriteGames) + "]";
 	}		
 
 }
