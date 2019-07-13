@@ -18,11 +18,11 @@
 <h:body>
 
 	<h:form>
-		<h:messages styleClass="error" />		
+		<!-- 		<h:messages styleClass="error" />		-->		
 		First name: <h:inputText id="firstName" value="#{employee.firstName}"
 			label="First name" required="true"
 			a:placeholder="What's your first name?"
-			requiredMessage="Your first name is mandatory" />
+			requiredMessage="Your first name is missing" />
 		<h:message for="firstName" styleClass="error" />
 		<br />
 		<br />
@@ -30,14 +30,14 @@
 		Last name: <h:inputText id="lastName" value="#{employee.lastName}"
 			label="Last name" required="true"
 			a:placeholder="What's your last name?"
-			requiredMessage="Your last name is mandatory" />
+			requiredMessage="Your last name is missing" />
 		<h:message for="lastName" styleClass="error" />
 		<br />
 		<br />
 		
 		Email: <h:inputText id="email" value="#{employee.email}" label="Email"
 			required="true" a:placeholder="What's your email?"
-			requiredMessage="Your email is mandatory" />
+			requiredMessage="Your email is missing" />
 		<h:message for="email" styleClass="error" />
 		<br />
 		<br />
@@ -54,7 +54,7 @@
 		
 		Zip Code: <h:inputText id="zipCode" value="#{employee.zipCode}"
 			label="Zip Code" required="true"
-			requiredMessage="Your email is mandatory">
+			requiredMessage="Zip Code is missing or may be out of range 5-10">
 			<f:validateLength minimum="5" maximum="10" />
 		</h:inputText>
 		<h:message for="zipCode" styleClass="error" />
@@ -64,6 +64,16 @@
 		Country : <h:selectOneMenu id="country" value="#{employee.country}">
 			<f:selectItems value="#{employee.countryOptions}" />
 		</h:selectOneMenu>
+		<br />
+		<br />
+		
+		Phone No: <h:inputText id="contactNumber"
+			value="#{employee.contactNumber}" label="Phone Number"
+			validatorMessage="Phone Number must follow XXX-XXX-XXXX">
+			<!-- a:placeholder="XXX-XXX-XXXX"> -->
+			<f:validateRegex pattern="\d{3}-\d{3}-\d{4}" />
+		</h:inputText>
+		<h:message for="contactNumber" styleClass="error" />
 		<br />
 		<br />
 		

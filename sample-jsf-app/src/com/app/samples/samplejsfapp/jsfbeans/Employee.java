@@ -46,6 +46,9 @@ public class Employee {
 
 	/** The favorite games. */
 	private String[] favoriteGames;
+	
+	/** The contact number. */
+	private String contactNumber;
 	/**
 	 * Instantiates a new employee.
 	 */
@@ -212,6 +215,9 @@ public class Employee {
 	 * @return the email
 	 */
 	public String getEmail() {
+		if(email != null) {
+			logger.info("Email : "+email);
+		}
 		return email;
 	}
 
@@ -232,6 +238,9 @@ public class Employee {
 	 * @return the zip code
 	 */
 	public String getZipCode() {
+		if(zipCode != null) {
+			logger.info("Zip Code : "+zipCode);
+		}
 		return zipCode;
 	}
 
@@ -261,6 +270,29 @@ public class Employee {
 	public void setFreePasses(int freePasses) {
 		this.freePasses = freePasses;
 	}
+	
+	
+
+	/**
+	 * Gets the contact number.
+	 *
+	 * @return the contact number
+	 */
+	public String getContactNumber() {
+		if(contactNumber != null) {
+			logger.info("Contact Number : "+contactNumber);
+		}
+		return contactNumber;
+	}
+
+	/**
+	 * Sets the contact number.
+	 *
+	 * @param contactNumber the new contact number
+	 */
+	public void setContactNumber(String contactNumber) {
+		this.contactNumber = contactNumber;
+	}
 
 	/**
 	 * To string.
@@ -272,7 +304,7 @@ public class Employee {
 		return "Employee [logger=" + logger + ", fullName=" + fullName + ", firstName=" + firstName + ", lastName="
 				+ lastName + ", email=" + email + ", country=" + country + ", zipCode=" + zipCode + ", freePasses="
 				+ freePasses + ", countryOptions=" + countryOptions + ", favoriteLanguage=" + favoriteLanguage
-				+ ", favoriteGames=" + Arrays.toString(favoriteGames) + "]";
+				+ ", favoriteGames=" + Arrays.toString(favoriteGames) + ", contactNumber=" + contactNumber + "]";
 	}		
 
 }
