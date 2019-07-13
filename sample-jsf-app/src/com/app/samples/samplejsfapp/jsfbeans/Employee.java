@@ -24,14 +24,19 @@ public class Employee {
 	private String firstName;
 
 	/** The last name. */
-	private String lastName;
-	
+	private String lastName;	
 	
 	/** The email. */
 	private String email;
 
 	/** The country. */
 	private String country;
+	
+	/** The zip code. */
+	private String zipCode;
+	
+	/** The free passes. */
+	private int freePasses;
 
 	/** The country options. */
 	private List<String> countryOptions;
@@ -218,6 +223,44 @@ public class Employee {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	
+
+	/**
+	 * Gets the zip code.
+	 *
+	 * @return the zip code
+	 */
+	public String getZipCode() {
+		return zipCode;
+	}
+
+	/**
+	 * Sets the zip code.
+	 *
+	 * @param zipCode the new zip code
+	 */
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+	}
+
+	/**
+	 * Gets the free passes.
+	 *
+	 * @return the free passes
+	 */
+	public int getFreePasses() {
+		return freePasses;
+	}
+
+	/**
+	 * Sets the free passes.
+	 *
+	 * @param freePasses the new free passes
+	 */
+	public void setFreePasses(int freePasses) {
+		this.freePasses = freePasses;
+	}
 
 	/**
 	 * To string.
@@ -227,8 +270,9 @@ public class Employee {
 	@Override
 	public String toString() {
 		return "Employee [logger=" + logger + ", fullName=" + fullName + ", firstName=" + firstName + ", lastName="
-				+ lastName + ", email=" + email + ", country=" + country + ", countryOptions=" + countryOptions
-				+ ", favoriteLanguage=" + favoriteLanguage + ", favoriteGames=" + Arrays.toString(favoriteGames) + "]";
+				+ lastName + ", email=" + email + ", country=" + country + ", zipCode=" + zipCode + ", freePasses="
+				+ freePasses + ", countryOptions=" + countryOptions + ", favoriteLanguage=" + favoriteLanguage
+				+ ", favoriteGames=" + Arrays.toString(favoriteGames) + "]";
 	}		
 
 }

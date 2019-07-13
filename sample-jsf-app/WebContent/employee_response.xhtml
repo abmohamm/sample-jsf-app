@@ -11,18 +11,23 @@
 <h:body>
 	    Employee is confirmed: #{employee.fullName}
 	    <br />
-	<br />
+		<br />
 	 	Employee's Country : #{employee.country}
 	 	<br />
-	<br />
+		<br />
 	 	Favorite Language : #{employee.favoriteLanguage}
 	 	<br />
-	<br />
+		<br />
 	 	Favorite Games : 
 	 	<ul>
-		<ui:repeat value="#{employee.favoriteGames}" var="tempGame">
-			<li>#{tempGame}</li>
-		</ui:repeat>
-	</ul>
+			<ui:repeat value="#{employee.favoriteGames}" var="tempGame">
+				<li>#{tempGame}</li>
+			</ui:repeat>
+		</ul>
+		<br/>
+		Email : #{employee.email}
+		<br/>
+		<br/>
+		Free Passes : #{employee.freePasses}
 </h:body>
 </html>

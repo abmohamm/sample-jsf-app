@@ -42,6 +42,25 @@
 		<br />
 		<br />
 		
+		Free Passes: <h:inputText id="freePasses"
+			value="#{employee.freePasses}" label="Free Passes" required="true"
+			requiredMessage="Free Passes should be with in the range of 0-10">
+			<f:validateLongRange minimum="0" maximum="10" />
+		</h:inputText>
+		<h:message for="freePasses" styleClass="error" />
+
+		<br />
+		<br />
+		
+		Zip Code: <h:inputText id="zipCode" value="#{employee.zipCode}"
+			label="Zip Code" required="true"
+			requiredMessage="Your email is mandatory">
+			<f:validateLength minimum="5" maximum="10" />
+		</h:inputText>
+		<h:message for="zipCode" styleClass="error" />
+		<br />
+		<br />
+		
 		Country : <h:selectOneMenu id="country" value="#{employee.country}">
 			<f:selectItems value="#{employee.countryOptions}" />
 		</h:selectOneMenu>
