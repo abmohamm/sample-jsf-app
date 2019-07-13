@@ -16,6 +16,7 @@
 </h:head>
 
 <h:body>
+	<title>Employee Registration Form</title>
 
 	<h:form>
 		<!-- 		<h:messages styleClass="error" />		-->		
@@ -39,6 +40,16 @@
 			required="true" a:placeholder="What's your email?"
 			requiredMessage="Your email is missing" />
 		<h:message for="email" styleClass="error" />
+		<br />
+		<br />
+		
+		Employee Code: <h:inputText id="employeeCode"
+			value="#{employee.employeeCode}" label="Employee Code"
+			validator="#{employee.validateEmpCode}" />
+		<!-- required="true" -->
+		<!-- a:placeholder="What's your Employee Code?" -->
+		<!-- 			requiredMessage="Your Employee Code is missing" -->
+		<h:message for="employeeCode" styleClass="error" />
 		<br />
 		<br />
 		

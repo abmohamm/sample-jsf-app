@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.app.samples.samplejsfapp.jsfbeans;
 
 import java.util.ArrayList;
@@ -5,14 +8,24 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class Employee.
+ *
+ * @author Abid
+ * The Class Employee.
  */
 @ManagedBean
 public class Employee {
+	
+	/** The Constant EMP_CODE. */
+	private static final String EMP_CODE = "LUV";
 
 	/** The logger. */
 	Logger logger = Logger.getLogger(Employee.class.getName());
@@ -49,6 +62,9 @@ public class Employee {
 	
 	/** The contact number. */
 	private String contactNumber;
+	
+	/** The employee code. */
+	private String employeeCode;
 	/**
 	 * Instantiates a new employee.
 	 */
@@ -293,6 +309,29 @@ public class Employee {
 	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
 	}
+	
+	
+
+	/**
+	 * Gets the employee code.
+	 *
+	 * @return the employee code
+	 */
+	public String getEmployeeCode() {
+		if(employeeCode != null) {
+			logger.info("Employee Code : "+employeeCode);
+		}
+		return employeeCode;
+	}
+
+	/**
+	 * Sets the employee code.
+	 *
+	 * @param employeeCode the new employee code
+	 */
+	public void setEmployeeCode(String employeeCode) {
+		this.employeeCode = employeeCode;
+	}
 
 	/**
 	 * To string.
@@ -304,7 +343,30 @@ public class Employee {
 		return "Employee [logger=" + logger + ", fullName=" + fullName + ", firstName=" + firstName + ", lastName="
 				+ lastName + ", email=" + email + ", country=" + country + ", zipCode=" + zipCode + ", freePasses="
 				+ freePasses + ", countryOptions=" + countryOptions + ", favoriteLanguage=" + favoriteLanguage
-				+ ", favoriteGames=" + Arrays.toString(favoriteGames) + ", contactNumber=" + contactNumber + "]";
+				+ ", favoriteGames=" + Arrays.toString(favoriteGames) + ", contactNumber=" + contactNumber
+				+ ", employeeCode=" + employeeCode + "]";
 	}		
+	
+	/**
+	 * Validate emp code.
+	 *
+	 * @param facesContext the faces context
+	 * @param uiComponent the ui component
+	 * @param value the value
+	 * @throws ValidatorException the validator exception
+	 */
+	public void validateEmpCode(FacesContext facesContext,UIComponent uiComponent,Object value) throws ValidatorException { 
+		FacesMessage facesMessage = null;
+		if(value == null) {
+			return;
+		}
+		String data = value.toString();
+		logger.info("value passed is : "+data);
+		
+		if(!data.startsWith(EMP_CODE)) {
+			facesMessage = new FacesMessage("Employee Code must start with LUV");
+			throw new ValidatorException(facesMessage);			
+		}
+	}
 
 }
