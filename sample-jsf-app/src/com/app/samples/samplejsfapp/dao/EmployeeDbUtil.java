@@ -90,9 +90,11 @@ public class EmployeeDbUtil {
 		ResultSet myRs = null;
 
 		try {
+			logger.info("Trying to establish connection");
 			myConn = getConnection();
+			logger.info("successfully established connection");
 
-			String sql = "select * from customer order by last_name";
+			String sql = "select * from employees order by last_name";
 
 			myStmt = myConn.createStatement();
 
@@ -122,7 +124,7 @@ public class EmployeeDbUtil {
 
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
-
+		Date date = null;
 		try {
 			myConn = getConnection();
 
@@ -133,17 +135,18 @@ public class EmployeeDbUtil {
 
 			if(employee != null) {
 				// set params
-				myStmt.setBigDecimal(1, employee.getEmployeeid());
+				myStmt.setInt(1, employee.getEmployeeid());
 				myStmt.setString(2, employee.getFirstName());
 				myStmt.setString(3, employee.getLastName());
 				myStmt.setString(4, employee.getEmail());
 				myStmt.setString(5, employee.getPhoneNumber());
-				myStmt.setDate(6, employee.getHireDate());
+				date = new Date(employee.getHireDate().getTime());
+				myStmt.setDate(6, date);
 				myStmt.setString(7, employee.getJobId());
-				myStmt.setBigDecimal(8, employee.getSalary());				
-				myStmt.setBigDecimal(9, employee.getCommissionPct());
-				myStmt.setBigDecimal(10, employee.getManagerId());
-				myStmt.setBigDecimal(11, employee.getDepartmentId());
+				myStmt.setInt(8, employee.getSalary());				
+				myStmt.setInt(9, employee.getCommissionPct());
+				myStmt.setInt(10, employee.getManagerId());
+				myStmt.setInt(11, employee.getDepartmentId());
 			}			
 			myStmt.execute();	
 			logger.info("Employee record with "+employee.getEmployeeid()+" is inserted successfully ");
@@ -220,7 +223,7 @@ public class EmployeeDbUtil {
 			myStmt.setString(1, employee.getFirstName());
 			myStmt.setString(2, employee.getLastName());
 			myStmt.setString(3, employee.getEmail());
-			myStmt.setBigDecimal(4, employee.getEmployeeid());
+			myStmt.setInt(4, employee.getEmployeeid());
 			myStmt.execute();
 			logger.info("Employee record with "+employee.getEmployeeid()+" is updated successfully ");
 		}
@@ -308,17 +311,17 @@ public class EmployeeDbUtil {
 		try {
 			if(resultSet != null) {
 				// retrieve data from result set row			
-				employee.setEmployeeid((BigDecimal)resultSet.getBigDecimal(EMPLOYEE_ID));
+				employee.setEmployeeid((int)resultSet.getInt(EMPLOYEE_ID));
 				employee.setFirstName((String)resultSet.getString(FIRST_NAME));
 				employee.setLastName((String)resultSet.getString(LAST_NAME));
 				employee.setEmail((String)resultSet.getString(EMAIL));
 				employee.setPhoneNumber((String)resultSet.getString(PHONE_NUMBER));
 				employee.setHireDate((Date)resultSet.getDate(HIRE_DATE));
 				employee.setJobId((String)resultSet.getString(JOB_ID));
-				employee.setSalary((BigDecimal)resultSet.getBigDecimal(SALARY));
-				employee.setCommissionPct((BigDecimal)resultSet.getBigDecimal(COMMISSION_PCT));
-				employee.setManagerId((BigDecimal)resultSet.getBigDecimal(MANAGER_ID));
-				employee.setDepartmentId((BigDecimal)resultSet.getBigDecimal(DEPARTMENT_ID));
+				employee.setSalary((int)resultSet.getInt(SALARY));
+				employee.setCommissionPct((int)resultSet.getInt(COMMISSION_PCT));
+				employee.setManagerId((int)resultSet.getInt(MANAGER_ID));
+				employee.setDepartmentId((int)resultSet.getInt(DEPARTMENT_ID));
 				logger.info("Employee Data : "+employee.toString());
 			}
 		}

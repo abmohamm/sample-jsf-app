@@ -3,10 +3,9 @@
  */
 package com.app.samples.samplejsfapp.jsfbeans;
 
-import java.math.BigDecimal;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -36,7 +35,7 @@ public class Employee {
 	Logger logger = Logger.getLogger(Employee.class.getName());
 	
 	/** The employeeid. */
-	private BigDecimal employeeid;
+	private int employeeid;
 	
 	/** The phone number. */
 	private String phoneNumber;
@@ -48,16 +47,16 @@ public class Employee {
 	private String jobId;
 	
 	/** The salary. */
-	private BigDecimal salary;
+	private int salary;
 	
 	/** The commission pct. */
-	private BigDecimal commissionPct;
+	private int commissionPct;
 	
 	/** The manager id. */
-	private BigDecimal managerId;
+	private int managerId;
 	
 	/** The department id. */
-	private BigDecimal departmentId;
+	private int departmentId;
 
 	/** The full name. */
 	private String fullName;
@@ -156,8 +155,8 @@ public class Employee {
 	 * @param contactNumber the contact number
 	 * @param employeeCode the employee code
 	 */
-	public Employee(BigDecimal employeeid, String phoneNumber, Date hireDate, String jobId, BigDecimal salary,
-			BigDecimal commissionPct, BigDecimal managerId, BigDecimal departmentId, String fullName, String firstName,
+	public Employee(int employeeid, String phoneNumber, Date hireDate, String jobId, int salary,
+			int commissionPct, int managerId, int departmentId, String fullName, String firstName,
 			String lastName, String email, String country, String zipCode, int freePasses, List<String> countryOptions,
 			String favoriteLanguage, String[] favoriteGames, String contactNumber, String employeeCode) {
 		super();
@@ -446,7 +445,7 @@ public class Employee {
 	 *
 	 * @return the employeeid
 	 */
-	public BigDecimal getEmployeeid() {
+	public int getEmployeeid() {
 		return employeeid;
 	}
 
@@ -455,7 +454,7 @@ public class Employee {
 	 *
 	 * @param employeeid the new employeeid
 	 */
-	public void setEmployeeid(BigDecimal employeeid) {
+	public void setEmployeeid(int employeeid) {
 		this.employeeid = employeeid;
 	}
 
@@ -518,7 +517,7 @@ public class Employee {
 	 *
 	 * @return the salary
 	 */
-	public BigDecimal getSalary() {
+	public int getSalary() {
 		return salary;
 	}
 
@@ -527,7 +526,7 @@ public class Employee {
 	 *
 	 * @param salary the new salary
 	 */
-	public void setSalary(BigDecimal salary) {
+	public void setSalary(int salary) {
 		this.salary = salary;
 	}
 
@@ -536,7 +535,7 @@ public class Employee {
 	 *
 	 * @return the commission pct
 	 */
-	public BigDecimal getCommissionPct() {
+	public int getCommissionPct() {
 		return commissionPct;
 	}
 
@@ -545,7 +544,7 @@ public class Employee {
 	 *
 	 * @param commissionPct the new commission pct
 	 */
-	public void setCommissionPct(BigDecimal commissionPct) {
+	public void setCommissionPct(int commissionPct) {
 		this.commissionPct = commissionPct;
 	}
 
@@ -554,7 +553,7 @@ public class Employee {
 	 *
 	 * @return the manager id
 	 */
-	public BigDecimal getManagerId() {
+	public int getManagerId() {
 		return managerId;
 	}
 
@@ -563,7 +562,7 @@ public class Employee {
 	 *
 	 * @param managerId the new manager id
 	 */
-	public void setManagerId(BigDecimal managerId) {
+	public void setManagerId(int managerId) {
 		this.managerId = managerId;
 	}
 
@@ -572,7 +571,7 @@ public class Employee {
 	 *
 	 * @return the department id
 	 */
-	public BigDecimal getDepartmentId() {
+	public int getDepartmentId() {
 		return departmentId;
 	}
 
@@ -581,7 +580,7 @@ public class Employee {
 	 *
 	 * @param departmentId the new department id
 	 */
-	public void setDepartmentId(BigDecimal departmentId) {
+	public void setDepartmentId(int departmentId) {
 		this.departmentId = departmentId;
 	}
 

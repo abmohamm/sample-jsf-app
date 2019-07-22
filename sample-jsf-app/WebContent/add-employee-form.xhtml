@@ -57,9 +57,12 @@
 				<h:message for="email" />
 
 				<h:outputLabel>Hire Date:</h:outputLabel>
-				<h:inputText value="#{employee.hireDate}" id="hireDate" a:placeholder="mm-dd-yyyy"/> 
+				<h:inputText value="#{employee.hireDate}" id="hireDate"
+					a:placeholder="mm-dd-yyyy">
+					<f:convertDateTime pattern="mm-dd-yyyy" />
+				</h:inputText>
 				<h:message for="hireDate" />
-				
+
 				<h:outputLabel>Job Id:</h:outputLabel>
 				<h:inputText value="#{employee.jobId}" id="jobId" />
 				<h:message for="jobId" />
