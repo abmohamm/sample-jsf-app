@@ -18,6 +18,37 @@
 			<li>#{temp.firstName} #{temp.lastName}</li>
 		</ui:repeat>
 	</ul>
+	<h:dataTable var="temp" value="#{studentDataUtil.students}" border="1">
+		<h:column>
+
+			<!-- column header -->
+			<f:facet name="header">First Name</f:facet>
+
+			<!-- each row value -->
+		#{temp.firstName}
+		
+		</h:column>
+
+		<h:column>
+
+			<!-- column header -->
+			<f:facet name="header">Last Name</f:facet>
+
+			<!-- each row value -->
+		#{temp.lastName}
+		
+		</h:column>
+
+		<h:column>
+
+			<!-- column header -->
+			<f:facet name="header">Email</f:facet>
+
+			<!-- each row value -->
+		#{temp.email}
+		
+		</h:column>
+	</h:dataTable>
 
 
 </h:body>

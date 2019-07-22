@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:rich="http://richfaces.org/rich">
+
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<title>Add Employee</title>
+
+	<h:outputStylesheet library="css" name="style.css" />
+	<h:outputStylesheet library="css" name="add-employee-style.css" />
+
+</h:head>
+
+<h:body>
+
+	<div id="wrapper">
+		<div id="header">
+			<h2>Employee Form</h2>
+		</div>
+	</div>
+
+	<div id="container">
+		<h3>Add Employee</h3>
+
+		<h:messages globalOnly="true" />
+
+		<h:form id="form" style="margin-top: 10px;">
+			<h:panelGrid columns="3">
+
+				<h:outputLabel>Employee Id:</h:outputLabel>
+				<h:inputText value="#{employee.employeeid}" id="employeeid" />
+				<h:message for="employeeid" />
+
+				<h:outputLabel>First name:</h:outputLabel>
+				<h:inputText value="#{employee.firstName}" id="firstName" />
+				<h:message for="firstName" />
+
+				<h:outputLabel>Last name:</h:outputLabel>
+				<h:inputText value="#{employee.lastName}" id="lastName" />
+				<h:message for="lastName" />
+
+				<h:outputLabel>Email:</h:outputLabel>
+				<h:inputText value="#{employee.email}" id="email" required="true"
+					requiredMessage="Your email is mandatory." />
+				<h:message for="email" />
+
+				<h:outputLabel>Phone Number:</h:outputLabel>
+				<h:inputText value="#{employee.phoneNumber}" id="phoneNumber"
+					required="true" requiredMessage="Your PhoneNumber is mandatory." />
+				<h:message for="email" />
+
+				<h:outputLabel>Hire Date:</h:outputLabel>
+				<h:inputText value="#{employee.hireDate}" id="hireDate" a:placeholder="mm-dd-yyyy"/> 
+				<h:message for="hireDate" />
+				
+				<h:outputLabel>Job Id:</h:outputLabel>
+				<h:inputText value="#{employee.jobId}" id="jobId" />
+				<h:message for="jobId" />
+
+				<h:outputLabel>Salary:</h:outputLabel>
+				<h:inputText value="#{employee.salary}" id="salary" />
+				<h:message for="salary" />
+
+				<h:outputLabel>Commission PCT:</h:outputLabel>
+				<h:inputText value="#{employee.commissionPct}" id="commissionPct" />
+				<h:message for="commissionPct" />
+
+				<h:outputLabel>Manager Id:</h:outputLabel>
+				<h:inputText value="#{employee.managerId}" id="managerId" />
+				<h:message for="managerId" />
+
+				<h:outputLabel>Department Id:</h:outputLabel>
+				<h:inputText value="#{employee.departmentId}" id="departmentId" />
+				<h:message for="departmentId" />
+
+				<h:outputLabel />
+				<h:commandButton value="Save" styleClass="save"
+					action="#{employeeController.addEmployee(employee)}" />
+
+			</h:panelGrid>
+		</h:form>
+
+		<div style="clear: both;"></div>
+
+		<p>
+			<h:outputLink value="list-employees.xhtml">Back to List</h:outputLink>
+		</p>
+
+	</div>
+</h:body>
+</html>

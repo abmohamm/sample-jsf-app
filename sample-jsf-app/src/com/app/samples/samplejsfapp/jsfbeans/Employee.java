@@ -3,16 +3,21 @@
  */
 package com.app.samples.samplejsfapp.jsfbeans;
 
+import java.math.BigDecimal;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
+
+import static com.app.samples.samplejsfapp.jsfbeans.util.DBConstants.*;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -22,13 +27,37 @@ import javax.faces.validator.ValidatorException;
  * The Class Employee.
  */
 @ManagedBean
+@ApplicationScoped
 public class Employee {
 	
-	/** The Constant EMP_CODE. */
-	private static final String EMP_CODE = "LUV";
+	
 
 	/** The logger. */
 	Logger logger = Logger.getLogger(Employee.class.getName());
+	
+	/** The employeeid. */
+	private BigDecimal employeeid;
+	
+	/** The phone number. */
+	private String phoneNumber;
+	
+	/** The hire date. */
+	private Date hireDate;
+	
+	/** The job id. */
+	private String jobId;
+	
+	/** The salary. */
+	private BigDecimal salary;
+	
+	/** The commission pct. */
+	private BigDecimal commissionPct;
+	
+	/** The manager id. */
+	private BigDecimal managerId;
+	
+	/** The department id. */
+	private BigDecimal departmentId;
 
 	/** The full name. */
 	private String fullName;
@@ -65,6 +94,7 @@ public class Employee {
 	
 	/** The employee code. */
 	private String employeeCode;
+	
 	/**
 	 * Instantiates a new employee.
 	 */
@@ -80,6 +110,15 @@ public class Employee {
 		countryOptions.add("United Kingdom");
 		countryOptions.add("United States");		
 	}
+	
+	/**
+	 * Instantiates a new employee.
+	 *
+	 * @return the first name
+	 */
+	
+
+
 
 	/**
 	 * Gets the first name.
@@ -91,6 +130,57 @@ public class Employee {
 			logger.info("first name : "+firstName);
 		}
 		return firstName;
+	}
+
+	/**
+	 * Instantiates a new employee.
+	 *
+	 * @param employeeid the employeeid
+	 * @param phoneNumber the phone number
+	 * @param hireDate the hire date
+	 * @param jobId the job id
+	 * @param salary the salary
+	 * @param commissionPct the commission pct
+	 * @param managerId the manager id
+	 * @param departmentId the department id
+	 * @param fullName the full name
+	 * @param firstName the first name
+	 * @param lastName the last name
+	 * @param email the email
+	 * @param country the country
+	 * @param zipCode the zip code
+	 * @param freePasses the free passes
+	 * @param countryOptions the country options
+	 * @param favoriteLanguage the favorite language
+	 * @param favoriteGames the favorite games
+	 * @param contactNumber the contact number
+	 * @param employeeCode the employee code
+	 */
+	public Employee(BigDecimal employeeid, String phoneNumber, Date hireDate, String jobId, BigDecimal salary,
+			BigDecimal commissionPct, BigDecimal managerId, BigDecimal departmentId, String fullName, String firstName,
+			String lastName, String email, String country, String zipCode, int freePasses, List<String> countryOptions,
+			String favoriteLanguage, String[] favoriteGames, String contactNumber, String employeeCode) {
+		super();
+		this.employeeid = employeeid;
+		this.phoneNumber = phoneNumber;
+		this.hireDate = hireDate;
+		this.jobId = jobId;
+		this.salary = salary;
+		this.commissionPct = commissionPct;
+		this.managerId = managerId;
+		this.departmentId = departmentId;
+		this.fullName = fullName;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.country = country;
+		this.zipCode = zipCode;
+		this.freePasses = freePasses;
+		this.countryOptions = countryOptions;
+		this.favoriteLanguage = favoriteLanguage;
+		this.favoriteGames = favoriteGames;
+		this.contactNumber = contactNumber;
+		this.employeeCode = employeeCode;
 	}
 
 	/**
@@ -340,13 +430,170 @@ public class Employee {
 	 */
 	@Override
 	public String toString() {
-		return "Employee [logger=" + logger + ", fullName=" + fullName + ", firstName=" + firstName + ", lastName="
-				+ lastName + ", email=" + email + ", country=" + country + ", zipCode=" + zipCode + ", freePasses="
-				+ freePasses + ", countryOptions=" + countryOptions + ", favoriteLanguage=" + favoriteLanguage
-				+ ", favoriteGames=" + Arrays.toString(favoriteGames) + ", contactNumber=" + contactNumber
-				+ ", employeeCode=" + employeeCode + "]";
+		return "Employee [employeeid=" + employeeid + ", phoneNumber=" + phoneNumber + ", hireDate=" + hireDate
+				+ ", jobId=" + jobId + ", salary=" + salary + ", commissionPct=" + commissionPct + ", managerId="
+				+ managerId + ", departmentId=" + departmentId + ", fullName=" + fullName + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", email=" + email + ", country=" + country + ", zipCode=" + zipCode
+				+ ", freePasses=" + freePasses + ", countryOptions=" + countryOptions + ", favoriteLanguage="
+				+ favoriteLanguage + ", favoriteGames=" + Arrays.toString(favoriteGames) + ", contactNumber="
+				+ contactNumber + ", employeeCode=" + employeeCode + "]";
 	}		
 	
+	
+	
+	/**
+	 * Gets the employeeid.
+	 *
+	 * @return the employeeid
+	 */
+	public BigDecimal getEmployeeid() {
+		return employeeid;
+	}
+
+	/**
+	 * Sets the employeeid.
+	 *
+	 * @param employeeid the new employeeid
+	 */
+	public void setEmployeeid(BigDecimal employeeid) {
+		this.employeeid = employeeid;
+	}
+
+	/**
+	 * Gets the phone number.
+	 *
+	 * @return the phone number
+	 */
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	/**
+	 * Sets the phone number.
+	 *
+	 * @param phoneNumber the new phone number
+	 */
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	/**
+	 * Gets the hire date.
+	 *
+	 * @return the hire date
+	 */
+	public Date getHireDate() {
+		return hireDate;
+	}
+
+	/**
+	 * Sets the hire date.
+	 *
+	 * @param hireDate the new hire date
+	 */
+	public void setHireDate(Date hireDate) {
+		this.hireDate = hireDate;
+	}
+
+	/**
+	 * Gets the job id.
+	 *
+	 * @return the job id
+	 */
+	public String getJobId() {
+		return jobId;
+	}
+
+	/**
+	 * Sets the job id.
+	 *
+	 * @param jobId the new job id
+	 */
+	public void setJobId(String jobId) {
+		this.jobId = jobId;
+	}
+
+	/**
+	 * Gets the salary.
+	 *
+	 * @return the salary
+	 */
+	public BigDecimal getSalary() {
+		return salary;
+	}
+
+	/**
+	 * Sets the salary.
+	 *
+	 * @param salary the new salary
+	 */
+	public void setSalary(BigDecimal salary) {
+		this.salary = salary;
+	}
+
+	/**
+	 * Gets the commission pct.
+	 *
+	 * @return the commission pct
+	 */
+	public BigDecimal getCommissionPct() {
+		return commissionPct;
+	}
+
+	/**
+	 * Sets the commission pct.
+	 *
+	 * @param commissionPct the new commission pct
+	 */
+	public void setCommissionPct(BigDecimal commissionPct) {
+		this.commissionPct = commissionPct;
+	}
+
+	/**
+	 * Gets the manager id.
+	 *
+	 * @return the manager id
+	 */
+	public BigDecimal getManagerId() {
+		return managerId;
+	}
+
+	/**
+	 * Sets the manager id.
+	 *
+	 * @param managerId the new manager id
+	 */
+	public void setManagerId(BigDecimal managerId) {
+		this.managerId = managerId;
+	}
+
+	/**
+	 * Gets the department id.
+	 *
+	 * @return the department id
+	 */
+	public BigDecimal getDepartmentId() {
+		return departmentId;
+	}
+
+	/**
+	 * Sets the department id.
+	 *
+	 * @param departmentId the new department id
+	 */
+	public void setDepartmentId(BigDecimal departmentId) {
+		this.departmentId = departmentId;
+	}
+
+	/**
+	 * Sets the country options.
+	 *
+	 * @param countryOptions the new country options
+	 */
+	public void setCountryOptions(List<String> countryOptions) {
+		this.countryOptions = countryOptions;
+	}
+
 	/**
 	 * Validate emp code.
 	 *
