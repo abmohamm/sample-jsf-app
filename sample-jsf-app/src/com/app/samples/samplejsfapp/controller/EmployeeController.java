@@ -2,12 +2,14 @@ package com.app.samples.samplejsfapp.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import com.app.samples.samplejsfapp.dao.EmployeeDbUtil;
@@ -23,7 +25,7 @@ public class EmployeeController {
 
 	/** The employees. */
 	private List<Employee> employees;
-	
+
 	/** The employee db util. */
 	private EmployeeDbUtil employeeDbUtil;
 
@@ -73,7 +75,7 @@ public class EmployeeController {
 			addErrorMessage(exc);
 		}
 	}
-	
+
 	/**
 	 * Adds the employee.
 	 *
@@ -85,21 +87,72 @@ public class EmployeeController {
 		logger.info("Adding Employee : " + employee.toString());
 
 		try {
-			
+
 			// add employee to the database
 			employeeDbUtil.addEmployee(employee);
-			
+
 		} catch (Exception exc) {
 			// send this to server logs
 			logger.log(Level.SEVERE, "Error adding employees", exc);
-			
+
 			// add error message for JSF page
 			addErrorMessage(exc);
 
 			return null;
 		}
-		
+
 		return "list-employees?faces-redirect=true";
+	}
+
+
+
+	public String loadEmployee(int employeeId) {
+
+		logger.info("loading employee : " + employeeId);
+
+		try {
+			// get employee from database
+			Employee employee = employeeDbUtil.getEmployee(employeeId);
+
+			// put in the request attribute ... so we can use it on the form page
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();		
+
+			Map<String, Object> requestMap = externalContext.getRequestMap();
+			requestMap.put("employee", employee);	
+
+		} catch (Exception exc) {
+			// send this to server logs
+			logger.log(Level.SEVERE, "Error loading employee id:" + employeeId, exc);
+
+			// add error message for JSF page
+			addErrorMessage(exc);
+
+			return null;
+		}
+
+		return "update-employee-form.xhtml";
+	}
+	
+	public String updateEmployee(Employee theEmployee) {
+
+		logger.info("updating Employee: " + theEmployee);
+		
+		try {
+			
+			// update Employee in the database
+			employeeDbUtil.updateEmployee(theEmployee);
+			
+		} catch (Exception exc) {
+			// send this to server logs
+			logger.log(Level.SEVERE, "Error updating Employee: " + theEmployee, exc);
+			
+			// add error message for JSF page
+			addErrorMessage(exc);
+			
+			return null;
+		}
+		
+		return "list-employees?faces-redirect=true";		
 	}
 
 	/**

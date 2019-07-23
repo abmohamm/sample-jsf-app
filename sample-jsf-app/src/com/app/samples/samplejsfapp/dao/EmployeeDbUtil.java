@@ -209,21 +209,32 @@ public class EmployeeDbUtil {
 
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
+		Date date = null;
 
 		try {
 			myConn = getConnection();
 
 			String sql = "update employees "
-					+ " set first_name=?, last_name=?, email=?"
+					+ " set first_name=?, last_name=?, email=?,PHONE_NUMBER=?,HIRE_DATE=?,JOB_ID=?,SALARY=?,COMMISSION_PCT=?,MANAGER_ID=?,DEPARTMENT_ID?"
 					+ " where EMPLOYEE_ID=?";
 
 			myStmt = myConn.prepareStatement(sql);
 
-			// set params
-			myStmt.setString(1, employee.getFirstName());
-			myStmt.setString(2, employee.getLastName());
-			myStmt.setString(3, employee.getEmail());
-			myStmt.setInt(4, employee.getEmployeeid());
+			if(employee != null) {
+				// set params
+				myStmt.setString(1, employee.getFirstName());
+				myStmt.setString(2, employee.getLastName());
+				myStmt.setString(3, employee.getEmail());
+				myStmt.setString(4, employee.getPhoneNumber());
+				date = new Date(employee.getHireDate().getTime());
+				myStmt.setDate(5, date);
+				myStmt.setString(6,employee.getJobId());
+				myStmt.setInt(7,employee.getSalary());
+				myStmt.setInt(8, employee.getCommissionPct());
+				myStmt.setInt(9, employee.getManagerId());
+				myStmt.setInt(10, employee.getDepartmentId());
+				myStmt.setInt(11, employee.getEmployeeid());
+			}
 			myStmt.execute();
 			logger.info("Employee record with "+employee.getEmployeeid()+" is updated successfully ");
 		}
@@ -330,4 +341,5 @@ public class EmployeeDbUtil {
 		}		
 		return employee;
 	}
+	
 }

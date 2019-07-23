@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -11,29 +10,29 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-	<title>Add Employee</title>
-
-	<h:outputStylesheet library="css" name="style.css" />
-	<h:outputStylesheet library="css" name="add-employee-style.css" />
-
+	<title>Update Employee</title>
+	
+	<h:outputStylesheet library="css" name="style.css"  />
+	<h:outputStylesheet library="css" name="add-Employee-style.css"  />
+	
 </h:head>
 
 <h:body>
 
 	<div id="wrapper">
 		<div id="header">
-			<h2>Add Employee Form</h2>
+			<h2>Update Employee Form</h2>
 		</div>
 	</div>
-
+	
 	<div id="container">
-		<h3>Add Employee</h3>
+		<h3>Update Employee</h3>
 
 		<h:messages globalOnly="true" />
 
-		<h:form id="form" style="margin-top: 10px;">
+		<h:form id="form" style="margin-top: 10px;" >
 			<h:panelGrid columns="3">
-
+			
 				<h:outputLabel>Employee Id:</h:outputLabel>
 				<h:inputText value="#{employee.employeeid}" id="employeeid" />
 				<h:message for="employeeid" />
@@ -82,20 +81,19 @@
 				<h:outputLabel>Department Id:</h:outputLabel>
 				<h:inputText value="#{employee.departmentId}" id="departmentId" />
 				<h:message for="departmentId" />
-
-				<h:outputLabel />
-				<h:commandButton value="Save" styleClass="save"
-					action="#{employeeController.addEmployee(employee)}" />
-
+				
+				 <h:inputHidden value="#{employee.employeeid}" />
+				
+				 <h:commandButton value="Save" styleClass="save" 
+				 			action="#{employeeController.updateEmployee(employee)}"/>
+			
 			</h:panelGrid>
 		</h:form>
 
 		<div style="clear: both;"></div>
 
-		<p>
-			<h:outputLink value="list-employees.xhtml">Back to List</h:outputLink>
-		</p>
+		<p><h:outputLink value="list-employees.xhtml">Back to List</h:outputLink></p>
 
-	</div>
+	</div>	
 </h:body>
 </html>
