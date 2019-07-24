@@ -40,7 +40,6 @@ public class EmployeeController {
 	 */
 	public EmployeeController() throws Exception {
 		employees = new ArrayList<>();
-
 		employeeDbUtil = EmployeeDbUtil.getInstance();
 	}
 
@@ -69,7 +68,7 @@ public class EmployeeController {
 
 		} catch (Exception exc) {
 			// send this to server logs
-			logger.log(Level.SEVERE, "Error loading employees", exc);
+			logger.log(Level.SEVERE, "exception while loading employees", exc.getMessage());
 
 			// add error message for JSF page
 			addErrorMessage(exc);
@@ -93,7 +92,7 @@ public class EmployeeController {
 
 		} catch (Exception exc) {
 			// send this to server logs
-			logger.log(Level.SEVERE, "Error adding employees", exc);
+			logger.log(Level.SEVERE, "exception while adding employees", exc.getMessage());
 
 			// add error message for JSF page
 			addErrorMessage(exc);
@@ -106,6 +105,12 @@ public class EmployeeController {
 
 
 
+	/**
+	 * Load employee.
+	 *
+	 * @param employeeId the employee id
+	 * @return the string
+	 */
 	public String loadEmployee(int employeeId) {
 
 		logger.info("loading employee : " + employeeId);
@@ -122,7 +127,7 @@ public class EmployeeController {
 
 		} catch (Exception exc) {
 			// send this to server logs
-			logger.log(Level.SEVERE, "Error loading employee id:" + employeeId, exc);
+			logger.log(Level.SEVERE, "exception while loading employee id:" + employeeId, exc.getMessage());
 
 			// add error message for JSF page
 			addErrorMessage(exc);
@@ -133,18 +138,24 @@ public class EmployeeController {
 		return "update-employee-form.xhtml";
 	}
 	
-	public String updateEmployee(Employee theEmployee) {
+	/**
+	 * Update employee.
+	 *
+	 * @param employee the employee
+	 * @return the string
+	 */
+	public String updateEmployee(Employee employee) {
 
-		logger.info("updating Employee: " + theEmployee);
+		logger.info("updating Employee: " + employee);
 		
 		try {
 			
 			// update Employee in the database
-			employeeDbUtil.updateEmployee(theEmployee);
+			employeeDbUtil.updateEmployee(employee);
 			
 		} catch (Exception exc) {
 			// send this to server logs
-			logger.log(Level.SEVERE, "Error updating Employee: " + theEmployee, exc);
+			logger.log(Level.SEVERE, "exception while updating Employee: " + employee, exc.getMessage());
 			
 			// add error message for JSF page
 			addErrorMessage(exc);
@@ -155,6 +166,12 @@ public class EmployeeController {
 		return "list-employees?faces-redirect=true";		
 	}
 	
+	/**
+	 * Delete employee.
+	 *
+	 * @param employeeId the employee id
+	 * @return the string
+	 */
 	public String deleteEmployee(int employeeId) {
 
 		logger.info("Deleting Employee id: " + employeeId);
@@ -166,7 +183,7 @@ public class EmployeeController {
 			
 		} catch (Exception exc) {
 			// send this to server logs
-			logger.log(Level.SEVERE, "Error deleting Employee id: " + employeeId, exc);
+			logger.log(Level.SEVERE, "exception while deleting Employee id: " + employeeId, exc.getMessage());
 			
 			// add error message for JSF page
 			addErrorMessage(exc);

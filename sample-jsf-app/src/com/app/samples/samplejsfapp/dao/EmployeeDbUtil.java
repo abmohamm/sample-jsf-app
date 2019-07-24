@@ -20,12 +20,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+import org.springframework.dao.DataAccessException;
 
 import com.app.samples.samplejsfapp.jsfbeans.Employee;
 
@@ -89,9 +92,8 @@ public class EmployeeDbUtil {
 	 * Gets the employees.
 	 *
 	 * @return the employees
-	 * @throws Exception the exception
 	 */
-	public List<Employee> getEmployees() throws Exception {
+	public List<Employee> getEmployees() {
 		Employee employee = null;
 		List<Employee> employees = new ArrayList<>();
 
@@ -114,14 +116,20 @@ public class EmployeeDbUtil {
 			while (myRs.next()) {
 				employee = mapResultSetToEmployee(myRs);
 				logger.info("Employee record for Employee Id : "+employee.getEmployeeid()+ " is "+employee.toString());
-				// add it to the list of employeess
+				// add it to the list of employees
 				employees.add(employee);
-			}			
-			return employees;		
+			}					
+		}
+		catch(DataAccessException dataAccessException) {
+			logger.log(Level.SEVERE, "exception while loading employees", dataAccessException.getMessage());
+		}
+		catch(Exception exception) {
+			exception.printStackTrace();
 		}
 		finally {
 			close (myConn, myStmt, myRs);
 		}
+		return employees;
 	}
 
 	/**
@@ -160,6 +168,12 @@ public class EmployeeDbUtil {
 			}			
 			myStmt.execute();	
 			logger.info("Employee record with "+employee.getEmployeeid()+" is inserted successfully ");
+		}
+		catch(DataAccessException dataAccessException) {
+			logger.log(Level.SEVERE, "exception while adding employees", dataAccessException.getMessage());
+		}
+		catch(Exception exception) {
+			exception.printStackTrace();
 		}
 		finally {
 			close (myConn, myStmt,null);
@@ -204,9 +218,16 @@ public class EmployeeDbUtil {
 
 			return employee;
 		}
+		catch(DataAccessException dataAccessException) {
+			logger.log(Level.SEVERE, "exception while loading employee id:" + empId, dataAccessException.getMessage());
+		}
+		catch(Exception exception) {
+			exception.printStackTrace();
+		}
 		finally {
 			close (myConn, myStmt, myRs);
 		}
+		return employee;
 	}
 
 	/**
@@ -248,6 +269,12 @@ public class EmployeeDbUtil {
 			myStmt.execute();
 			logger.info("Employee record with "+employee.getEmployeeid()+" is updated successfully ");
 		}
+		catch(DataAccessException dataAccessException) {
+			logger.log(Level.SEVERE, "exception while updating Employee: " + employee, dataAccessException.getMessage());
+		}
+		catch(Exception exception) {
+			exception.printStackTrace();
+		}
 		finally {
 			close (myConn, myStmt,null);
 		}		
@@ -277,6 +304,12 @@ public class EmployeeDbUtil {
 
 			myStmt.execute();
 			logger.info("employee record with "+employeeId+" deleted successfully ");
+		}
+		catch(DataAccessException dataAccessException) {
+			logger.log(Level.SEVERE, "exception while deleting Employee id: " + employeeId, dataAccessException.getMessage());
+		}
+		catch(Exception exception) {
+			exception.printStackTrace();
 		}
 		finally {
 			close (myConn, myStmt,null);
