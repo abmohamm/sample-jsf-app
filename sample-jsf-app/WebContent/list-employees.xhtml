@@ -31,6 +31,15 @@
 		<div id="content">
 
 			<h:messages globalOnly="true" />
+			
+			<!--  add a search box -->
+			<h:form>
+		
+				<h:outputLabel>Search student:</h:outputLabel> <h:inputText value="#{employeeController.searchName}" id="searchName" />
+                
+				<h:commandButton value="Search" action="list-students?faces-redirect=true" styleClass="add-student-button" />            
+            
+            </h:form>
 
 			<h:form>
 

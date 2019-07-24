@@ -387,4 +387,55 @@ public class EmployeeDbUtil {
 		return employee;
 	}
 	
+	public List<Employee> searchEmployees(String searchName)  throws Exception {
+
+		List<Employee> employees = new ArrayList<>();
+		Employee employee = null;
+		
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+		int studentId;
+		
+		try {
+			
+			// get connection to database
+			myConn = dataSource.getConnection();
+		
+	        	// create sql to search for Employees by name
+				String sql = "select * from employees where lower(first_name) like ? or lower(last_name) like ?";
+
+				// create prepared statement
+				myStmt = myConn.prepareStatement(sql);
+
+				// set params
+				String theSearchNameLike = "%" + searchName.toLowerCase() + "%";
+				myStmt.setString(1, theSearchNameLike);
+				myStmt.setString(2, theSearchNameLike);
+				 	        
+			// execute statement
+			myRs = myStmt.executeQuery();
+			
+			// retrieve data from result set row
+			while (myRs.next()) {
+				
+				employee = mapResultSetToEmployee(myRs);
+				
+				// add it to the list of Employees
+				employees.add(employee);			
+			}
+		}
+		catch(DataAccessException dataAccessException) {
+			logger.log(Level.SEVERE, "exception while searching for employee : " + employee.toString(), dataAccessException.getMessage());
+		}
+		catch(Exception exception) {
+			exception.printStackTrace();
+		}
+		finally {
+			// clean up JDBC objects
+			close(myConn, myStmt, myRs);
+		}
+		return employees;
+	}
+	
 }

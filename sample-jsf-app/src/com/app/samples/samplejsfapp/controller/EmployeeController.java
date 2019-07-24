@@ -29,6 +29,7 @@ public class EmployeeController {
 	/** The employee db util. */
 	private EmployeeDbUtil employeeDbUtil;
 
+	private String searchName;
 
 	/** The logger. */
 	Logger logger = Logger.getLogger(EmployeeController.class.getName());
@@ -58,14 +59,18 @@ public class EmployeeController {
 	public void loadEmployees() {
 
 		logger.info("Loading employees");
-
 		employees.clear();
 
 		try {
-
-			// get all employees from database
-			employees = employeeDbUtil.getEmployees();
-
+			//check if searchName is null or not. if null return all the employees else return the required employee details
+			
+			if(searchName != null && searchName.trim().length()>0) {
+				employees = employeeDbUtil.searchEmployees(searchName);				
+			}
+			else {
+				// get all employees from database
+				employees = employeeDbUtil.getEmployees();
+			}
 		} catch (Exception exc) {
 			// send this to server logs
 			logger.log(Level.SEVERE, "exception while loading employees", exc.getMessage());
@@ -203,6 +208,16 @@ public class EmployeeController {
 		FacesMessage message = new FacesMessage("Error: " + exc.getMessage());
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
+
+	public String getSearchName() {
+		return searchName;
+	}
+
+	public void setSearchName(String searchName) {
+		this.searchName = searchName;
+	}
+	
+	
 
 }
 
