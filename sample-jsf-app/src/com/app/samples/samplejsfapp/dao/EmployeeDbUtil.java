@@ -1,6 +1,17 @@
 package com.app.samples.samplejsfapp.dao;
 
-import java.math.BigDecimal;
+import static com.app.samples.samplejsfapp.jsfbeans.util.DBConstants.COMMISSION_PCT;
+import static com.app.samples.samplejsfapp.jsfbeans.util.DBConstants.DEPARTMENT_ID;
+import static com.app.samples.samplejsfapp.jsfbeans.util.DBConstants.EMAIL;
+import static com.app.samples.samplejsfapp.jsfbeans.util.DBConstants.EMPLOYEE_ID;
+import static com.app.samples.samplejsfapp.jsfbeans.util.DBConstants.FIRST_NAME;
+import static com.app.samples.samplejsfapp.jsfbeans.util.DBConstants.HIRE_DATE;
+import static com.app.samples.samplejsfapp.jsfbeans.util.DBConstants.JOB_ID;
+import static com.app.samples.samplejsfapp.jsfbeans.util.DBConstants.LAST_NAME;
+import static com.app.samples.samplejsfapp.jsfbeans.util.DBConstants.MANAGER_ID;
+import static com.app.samples.samplejsfapp.jsfbeans.util.DBConstants.PHONE_NUMBER;
+import static com.app.samples.samplejsfapp.jsfbeans.util.DBConstants.SALARY;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -17,7 +28,6 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.app.samples.samplejsfapp.jsfbeans.Employee;
-import static com.app.samples.samplejsfapp.jsfbeans.util.DBConstants.*;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -256,6 +266,7 @@ public class EmployeeDbUtil {
 
 		try {
 			myConn = getConnection();
+			logger.info("deleting employee with employee id : "+employeeId);
 
 			String sql = "delete from employees where employee_id=?";
 
@@ -265,6 +276,7 @@ public class EmployeeDbUtil {
 			myStmt.setInt(1, employeeId);
 
 			myStmt.execute();
+			logger.info("employee record with "+employeeId+" deleted successfully ");
 		}
 		finally {
 			close (myConn, myStmt,null);

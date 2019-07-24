@@ -3,6 +3,8 @@
  */
 package com.app.samples.samplejsfapp.jsfbeans;
 
+import static com.app.samples.samplejsfapp.jsfbeans.util.DBConstants.EMP_CODE;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -15,8 +17,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
-
-import static com.app.samples.samplejsfapp.jsfbeans.util.DBConstants.*;
 
 // TODO: Auto-generated Javadoc
 /**

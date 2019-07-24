@@ -154,6 +154,28 @@ public class EmployeeController {
 		
 		return "list-employees?faces-redirect=true";		
 	}
+	
+	public String deleteEmployee(int employeeId) {
+
+		logger.info("Deleting Employee id: " + employeeId);
+		
+		try {
+
+			// delete the Employee from the database
+			employeeDbUtil.deleteEmployee(employeeId);
+			
+		} catch (Exception exc) {
+			// send this to server logs
+			logger.log(Level.SEVERE, "Error deleting Employee id: " + employeeId, exc);
+			
+			// add error message for JSF page
+			addErrorMessage(exc);
+			
+			return null;
+		}
+		
+		return "list-employees";	
+	}
 
 	/**
 	 * Adds the error message.
