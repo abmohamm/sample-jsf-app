@@ -94,6 +94,10 @@ public class Employee {
 	/** The employee code. */
 	private String employeeCode;
 	
+	
+	/** The date updated. */
+	private String dateUpdated;
+	
 	/**
 	 * Instantiates a new employee.
 	 */
@@ -129,57 +133,6 @@ public class Employee {
 			logger.info("first name : "+firstName);
 		}
 		return firstName;
-	}
-
-	/**
-	 * Instantiates a new employee.
-	 *
-	 * @param employeeid the employeeid
-	 * @param phoneNumber the phone number
-	 * @param hireDate the hire date
-	 * @param jobId the job id
-	 * @param salary the salary
-	 * @param commissionPct the commission pct
-	 * @param managerId the manager id
-	 * @param departmentId the department id
-	 * @param fullName the full name
-	 * @param firstName the first name
-	 * @param lastName the last name
-	 * @param email the email
-	 * @param country the country
-	 * @param zipCode the zip code
-	 * @param freePasses the free passes
-	 * @param countryOptions the country options
-	 * @param favoriteLanguage the favorite language
-	 * @param favoriteGames the favorite games
-	 * @param contactNumber the contact number
-	 * @param employeeCode the employee code
-	 */
-	public Employee(int employeeid, String phoneNumber, Date hireDate, String jobId, int salary,
-			int commissionPct, int managerId, int departmentId, String fullName, String firstName,
-			String lastName, String email, String country, String zipCode, int freePasses, List<String> countryOptions,
-			String favoriteLanguage, String[] favoriteGames, String contactNumber, String employeeCode) {
-		super();
-		this.employeeid = employeeid;
-		this.phoneNumber = phoneNumber;
-		this.hireDate = hireDate;
-		this.jobId = jobId;
-		this.salary = salary;
-		this.commissionPct = commissionPct;
-		this.managerId = managerId;
-		this.departmentId = departmentId;
-		this.fullName = fullName;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.country = country;
-		this.zipCode = zipCode;
-		this.freePasses = freePasses;
-		this.countryOptions = countryOptions;
-		this.favoriteLanguage = favoriteLanguage;
-		this.favoriteGames = favoriteGames;
-		this.contactNumber = contactNumber;
-		this.employeeCode = employeeCode;
 	}
 
 	/**
@@ -435,7 +388,7 @@ public class Employee {
 				+ ", lastName=" + lastName + ", email=" + email + ", country=" + country + ", zipCode=" + zipCode
 				+ ", freePasses=" + freePasses + ", countryOptions=" + countryOptions + ", favoriteLanguage="
 				+ favoriteLanguage + ", favoriteGames=" + Arrays.toString(favoriteGames) + ", contactNumber="
-				+ contactNumber + ", employeeCode=" + employeeCode + "]";
+				+ contactNumber + ", employeeCode=" + employeeCode + ", dateUpdated=" + dateUpdated + "]";
 	}		
 	
 	
@@ -591,6 +544,79 @@ public class Employee {
 	 */
 	public void setCountryOptions(List<String> countryOptions) {
 		this.countryOptions = countryOptions;
+	}
+	
+	
+
+	/**
+	 * Instantiates a new employee.
+	 *
+	 * @param employeeid the employeeid
+	 * @param phoneNumber the phone number
+	 * @param hireDate the hire date
+	 * @param jobId the job id
+	 * @param salary the salary
+	 * @param commissionPct the commission pct
+	 * @param managerId the manager id
+	 * @param departmentId the department id
+	 * @param fullName the full name
+	 * @param firstName the first name
+	 * @param lastName the last name
+	 * @param email the email
+	 * @param country the country
+	 * @param zipCode the zip code
+	 * @param freePasses the free passes
+	 * @param countryOptions the country options
+	 * @param favoriteLanguage the favorite language
+	 * @param favoriteGames the favorite games
+	 * @param contactNumber the contact number
+	 * @param employeeCode the employee code
+	 * @param dateUpdated the date updated
+	 */
+	public Employee(int employeeid, String phoneNumber, Date hireDate, String jobId, int salary, int commissionPct,
+			int managerId, int departmentId, String fullName, String firstName, String lastName, String email,
+			String country, String zipCode, int freePasses, List<String> countryOptions, String favoriteLanguage,
+			String[] favoriteGames, String contactNumber, String employeeCode, String dateUpdated) {
+		super();
+		this.employeeid = employeeid;
+		this.phoneNumber = phoneNumber;
+		this.hireDate = hireDate;
+		this.jobId = jobId;
+		this.salary = salary;
+		this.commissionPct = commissionPct;
+		this.managerId = managerId;
+		this.departmentId = departmentId;
+		this.fullName = fullName;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.country = country;
+		this.zipCode = zipCode;
+		this.freePasses = freePasses;
+		this.countryOptions = countryOptions;
+		this.favoriteLanguage = favoriteLanguage;
+		this.favoriteGames = favoriteGames;
+		this.contactNumber = contactNumber;
+		this.employeeCode = employeeCode;
+		this.dateUpdated = dateUpdated;
+	}
+
+	/**
+	 * Gets the date updated.
+	 *
+	 * @return the date updated
+	 */
+	public String getDateUpdated() {
+		return dateUpdated;
+	}
+
+	/**
+	 * Sets the date updated.
+	 *
+	 * @param dateUpdated the new date updated
+	 */
+	public void setDateUpdated(String dateUpdated) {
+		this.dateUpdated = dateUpdated;
 	}
 
 	/**

@@ -41,5 +41,11 @@ public class DBConstants {
 	
 	/** The Constant EMP_CODE. */
 	public static final String EMP_CODE = "LUV";
+	
+	/** The Constant DATE_UPDATED. */
+	public static final String CREAT_UPD_DATE = "CREAT_UPD_DATE";
+	
+	/** The Constant YYYY_MM_DD_HH_MM_SS. */
+	public static final String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd hh:mm:ss";
 
 }

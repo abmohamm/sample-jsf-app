@@ -137,6 +137,14 @@
 					</h:column>
 					
 					<h:column>
+						<!-- the column header -->
+						<f:facet name="header">Date Updated</f:facet>
+
+						<!--  the value for each row -->
+					#{tempemployee.dateUpdated}
+					</h:column>
+					
+					<h:column>
 					<!-- the column header -->
 					<f:facet name="header">Action</f:facet>
 
@@ -153,7 +161,7 @@
 				</h:dataTable>
 
 			</h:form>
-			<h:button value="Add employee" styleClass="add-employee-button"
+			<h:button value="Add Employee" styleClass="add-employee-button"
 				outcome="add-employee-form" />
 
 		</div>

@@ -1,6 +1,7 @@
 package com.app.samples.samplejsfapp.dao;
 
 import static com.app.samples.samplejsfapp.jsfbeans.util.DBConstants.COMMISSION_PCT;
+import static com.app.samples.samplejsfapp.jsfbeans.util.DBConstants.CREAT_UPD_DATE;
 import static com.app.samples.samplejsfapp.jsfbeans.util.DBConstants.DEPARTMENT_ID;
 import static com.app.samples.samplejsfapp.jsfbeans.util.DBConstants.EMAIL;
 import static com.app.samples.samplejsfapp.jsfbeans.util.DBConstants.EMPLOYEE_ID;
@@ -11,6 +12,7 @@ import static com.app.samples.samplejsfapp.jsfbeans.util.DBConstants.LAST_NAME;
 import static com.app.samples.samplejsfapp.jsfbeans.util.DBConstants.MANAGER_ID;
 import static com.app.samples.samplejsfapp.jsfbeans.util.DBConstants.PHONE_NUMBER;
 import static com.app.samples.samplejsfapp.jsfbeans.util.DBConstants.SALARY;
+import static com.app.samples.samplejsfapp.jsfbeans.util.DBConstants.YYYY_MM_DD_HH_MM_SS;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -18,6 +20,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -28,6 +31,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.dao.DataAccessException;
 
 import com.app.samples.samplejsfapp.jsfbeans.Employee;
@@ -142,12 +146,15 @@ public class EmployeeDbUtil {
 
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
+		Timestamp timestamp = null;
 		Date date = null;
 		try {
 			myConn = getConnection();
+			timestamp = getCurrentTimestamp();
+			logger.info("current  time : "+timestamp);
 
-			String sql = "insert into employees (EMPLOYEE_ID,FIRST_NAME, LAST_NAME, EMAIL,PHONE_NUMBER,HIRE_DATE,JOB_ID,SALARY,COMMISSION_PCT,MANAGER_ID,DEPARTMENT_ID) "
-					+ "values (?,?,?,?,?,?,?,?,?,?,?)";
+			String sql = "insert into employees (EMPLOYEE_ID,FIRST_NAME, LAST_NAME, EMAIL,PHONE_NUMBER,HIRE_DATE,JOB_ID,SALARY,COMMISSION_PCT,MANAGER_ID,DEPARTMENT_ID,CREAT_UPD_DATE) "
+					+ "values (?,?,?,?,?,?,?,?,?,?,?,?)";
 
 			myStmt = myConn.prepareStatement(sql);
 
@@ -165,6 +172,7 @@ public class EmployeeDbUtil {
 				myStmt.setInt(9, employee.getCommissionPct());
 				myStmt.setInt(10, employee.getManagerId());
 				myStmt.setInt(11, employee.getDepartmentId());
+				myStmt.setTimestamp(12, timestamp);
 			}			
 			myStmt.execute();	
 			logger.info("Employee record with "+employee.getEmployeeid()+" is inserted successfully ");
@@ -241,12 +249,15 @@ public class EmployeeDbUtil {
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
 		Date date = null;
+		Timestamp timestamp = null;
 
 		try {
 			myConn = getConnection();
+			timestamp = getCurrentTimestamp();
+			logger.info("current time : "+timestamp);
 
 			String sql = "update employees "
-					+ " set first_name=?, last_name=?, email=?,PHONE_NUMBER=?,HIRE_DATE=?,JOB_ID=?,SALARY=?,COMMISSION_PCT=?,MANAGER_ID=?,DEPARTMENT_ID?"
+					+ " set first_name=?, last_name=?, email=?,PHONE_NUMBER=?,HIRE_DATE=?,JOB_ID=?,SALARY=?,COMMISSION_PCT=?,MANAGER_ID=?,DEPARTMENT_ID?,DATE_UPDATED=?"
 					+ " where EMPLOYEE_ID=?";
 
 			myStmt = myConn.prepareStatement(sql);
@@ -265,6 +276,7 @@ public class EmployeeDbUtil {
 				myStmt.setInt(9, employee.getManagerId());
 				myStmt.setInt(10, employee.getDepartmentId());
 				myStmt.setInt(11, employee.getEmployeeid());
+				myStmt.setTimestamp(12, timestamp);
 			}
 			myStmt.execute();
 			logger.info("Employee record with "+employee.getEmployeeid()+" is updated successfully ");
@@ -364,8 +376,11 @@ public class EmployeeDbUtil {
 	 */
 	private Employee mapResultSetToEmployee(ResultSet resultSet) {
 		Employee employee = new Employee();
+		Timestamp dateUpdated = null;
+		String timeStamp = null;
 		try {
 			if(resultSet != null) {
+
 				// retrieve data from result set row			
 				employee.setEmployeeid((int)resultSet.getInt(EMPLOYEE_ID));
 				employee.setFirstName((String)resultSet.getString(FIRST_NAME));
@@ -378,12 +393,28 @@ public class EmployeeDbUtil {
 				employee.setCommissionPct((int)resultSet.getInt(COMMISSION_PCT));
 				employee.setManagerId((int)resultSet.getInt(MANAGER_ID));
 				employee.setDepartmentId((int)resultSet.getInt(DEPARTMENT_ID));
+				dateUpdated = resultSet.getTimestamp(CREAT_UPD_DATE);
+				if(dateUpdated != null) {
+					timeStamp = DateTimeFormat.forPattern(YYYY_MM_DD_HH_MM_SS).print(dateUpdated.getTime());
+					logger.info("time stamp for the record "+employee.getEmployeeid()+" is "+timeStamp);
+					employee.setDateUpdated(timeStamp);
+				}
+				else {
+					employee.setDateUpdated("-");
+				}
+				
 				logger.info("Employee Data : "+employee.toString());
 			}
 		}
 		catch(SQLException exception) {
 			exception.printStackTrace();
 		}		
+		catch(DataAccessException dataAccessException) {
+			logger.log(Level.SEVERE, "exception while mapping the record with Employee id: " + employee.getEmployeeid(), dataAccessException.getMessage());
+		}
+		catch(Exception exception) {
+			exception.printStackTrace();
+		}
 		return employee;
 	}
 	
@@ -395,7 +426,6 @@ public class EmployeeDbUtil {
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
 		ResultSet myRs = null;
-		int studentId;
 		
 		try {
 			
@@ -436,6 +466,20 @@ public class EmployeeDbUtil {
 			close(myConn, myStmt, myRs);
 		}
 		return employees;
+	}
+	
+	public Timestamp getCurrentTimestamp() {
+		Timestamp timeStamp = null;
+		try {
+			java.util.Date date = new java.util.Date();
+			long time = date.getTime();
+			timeStamp = new Timestamp(time);
+		}
+		catch(Exception exception) {
+			exception.printStackTrace();
+		}
+		logger.info("Current Timestamp is : "+timeStamp);
+		return timeStamp;		
 	}
 	
 }
