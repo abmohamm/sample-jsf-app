@@ -22,6 +22,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -147,7 +148,7 @@ public class EmployeeDbUtil {
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
 		Timestamp timestamp = null;
-		Date date = null;
+		Date hireDate = null;
 		try {
 			myConn = getConnection();
 			timestamp = getCurrentTimestamp();
@@ -165,8 +166,13 @@ public class EmployeeDbUtil {
 				myStmt.setString(3, employee.getLastName());
 				myStmt.setString(4, employee.getEmail());
 				myStmt.setString(5, employee.getPhoneNumber());
-				date = new Date(employee.getHireDate().getTime());
-				myStmt.setDate(6, date);
+				if(employee.getHireDate() != null) {
+					hireDate = new Date(employee.getHireDate().getTime());
+				}
+				else {
+					hireDate = getCurrentDate();
+				}
+				myStmt.setDate(6, hireDate);
 				myStmt.setString(7, employee.getJobId());
 				myStmt.setInt(8, employee.getSalary());				
 				myStmt.setInt(9, employee.getCommissionPct());
@@ -248,7 +254,7 @@ public class EmployeeDbUtil {
 
 		Connection myConn = null;
 		PreparedStatement myStmt = null;
-		Date date = null;
+		Date hireDate = null;
 		Timestamp timestamp = null;
 
 		try {
@@ -257,7 +263,7 @@ public class EmployeeDbUtil {
 			logger.info("current time : "+timestamp);
 
 			String sql = "update employees "
-					+ " set first_name=?, last_name=?, email=?,PHONE_NUMBER=?,HIRE_DATE=?,JOB_ID=?,SALARY=?,COMMISSION_PCT=?,MANAGER_ID=?,DEPARTMENT_ID?,DATE_UPDATED=?"
+					+ " set first_name=?, last_name=?, email=?,PHONE_NUMBER=?,HIRE_DATE=?,JOB_ID=?,SALARY=?,COMMISSION_PCT=?,MANAGER_ID=?,DEPARTMENT_ID=?,CREAT_UPD_DATE=?"
 					+ " where EMPLOYEE_ID=?";
 
 			myStmt = myConn.prepareStatement(sql);
@@ -268,15 +274,21 @@ public class EmployeeDbUtil {
 				myStmt.setString(2, employee.getLastName());
 				myStmt.setString(3, employee.getEmail());
 				myStmt.setString(4, employee.getPhoneNumber());
-				date = new Date(employee.getHireDate().getTime());
-				myStmt.setDate(5, date);
+				hireDate = new Date(employee.getHireDate().getTime());
+				if(employee.getHireDate() != null) {
+					hireDate = new Date(employee.getHireDate().getTime());
+				}
+				else {
+					hireDate = getCurrentDate();
+				}
+				myStmt.setDate(5, hireDate);
 				myStmt.setString(6,employee.getJobId());
 				myStmt.setInt(7,employee.getSalary());
 				myStmt.setInt(8, employee.getCommissionPct());
 				myStmt.setInt(9, employee.getManagerId());
 				myStmt.setInt(10, employee.getDepartmentId());
-				myStmt.setInt(11, employee.getEmployeeid());
-				myStmt.setTimestamp(12, timestamp);
+				myStmt.setTimestamp(11, timestamp);
+				myStmt.setInt(12, employee.getEmployeeid());
 			}
 			myStmt.execute();
 			logger.info("Employee record with "+employee.getEmployeeid()+" is updated successfully ");
@@ -480,6 +492,21 @@ public class EmployeeDbUtil {
 		}
 		logger.info("Current Timestamp is : "+timeStamp);
 		return timeStamp;		
+	}
+	
+	public Date getCurrentDate() {
+		Date date = null;
+		Calendar calendar = null;
+		try {
+			calendar = Calendar.getInstance();
+			date = new Date(calendar.getTime().getTime());
+		}
+		catch(Exception exception) {
+			exception.printStackTrace();
+		}
+		logger.info("Current Date is : "+date);
+		
+		return date;
 	}
 	
 }
