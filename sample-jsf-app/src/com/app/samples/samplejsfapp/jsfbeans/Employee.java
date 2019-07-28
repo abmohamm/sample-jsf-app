@@ -94,7 +94,6 @@ public class Employee {
 	/** The employee code. */
 	private String employeeCode;
 	
-	
 	/** The date updated. */
 	private String dateUpdated;
 	
@@ -227,8 +226,14 @@ public class Employee {
 	 * @return the full name
 	 */
 	public String getFullName() {
-		logger.info("full name : "+firstName+" "+lastName);
-		return firstName+" "+lastName;
+		if(firstName != null && lastName != null) {
+			logger.info("full name : "+firstName+" "+lastName);
+			return firstName+" "+lastName;
+		}
+		else {
+			return fullName;
+		}
+		
 	}
 
 	/**

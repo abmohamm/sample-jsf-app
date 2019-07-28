@@ -390,13 +390,18 @@ public class EmployeeDbUtil {
 		Employee employee = new Employee();
 		Timestamp dateUpdated = null;
 		String timeStamp = null;
+		String firstName = null;
+		String lastName = null;
+		String fullName = null;
 		try {
 			if(resultSet != null) {
 
 				// retrieve data from result set row			
 				employee.setEmployeeid((int)resultSet.getInt(EMPLOYEE_ID));
-				employee.setFirstName((String)resultSet.getString(FIRST_NAME));
-				employee.setLastName((String)resultSet.getString(LAST_NAME));
+				firstName = (String)resultSet.getString(FIRST_NAME);
+				lastName = (String)resultSet.getString(LAST_NAME);
+				fullName = firstName+" "+lastName;
+				employee.setFullName(fullName);
 				employee.setEmail((String)resultSet.getString(EMAIL));
 				employee.setPhoneNumber((String)resultSet.getString(PHONE_NUMBER));
 				employee.setHireDate((Date)resultSet.getDate(HIRE_DATE));
