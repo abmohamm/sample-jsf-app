@@ -68,9 +68,25 @@ select constraint_name,constraint_type from user_constraints where table_name='e
 
 desc user_cons_columns 
 
+select max(salary) from employees;
+
+select max(salary) from employees where salary<(select max(salary) from employees)
+
+select distinct(salary) from employees order by salary desc limit 0,1;
+
+SELECT e.*,ROW_NUMBER() OVER (ORDER BY salary DESC) row_num FROM Employees e
+
+SELECT * FROM ( SELECT e.*,ROW_NUMBER() OVER (ORDER BY salary DESC) row_num FROM Employees e ) WHERE row_num = 2; 
+
+SELECT salary FROM Employees  ORDER BY salary DESC
+
+SELECT salary FROM (SELECT salary FROM Employees  ORDER BY salary DESC) WHERE ROWNUM=2;
+
 select * from employees;
 
 select * from NEWTABLE;
+
+--query to load data from one table to another with same columns
 
 merge into NEWTABLE n using EMPLOYEES e on (e.employee_id=n.employee_id)
 when matched then
